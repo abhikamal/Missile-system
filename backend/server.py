@@ -396,7 +396,7 @@ async def intercept_missile(missile_id: str, interceptor_site_id: str):
                 break
         
         # Broadcast intercept event
-        await manager.broadcast(json.dumps({
+        await manager.broadcast(safe_json_dumps({
             "type": "intercept_event",
             "missile_id": missile_id,
             "interceptor_site_id": interceptor_site_id,
