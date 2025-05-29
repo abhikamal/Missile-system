@@ -308,7 +308,7 @@ async def update_missile_positions():
         
         # Broadcast updates to all connected clients
         if updated_data:
-            await manager.broadcast(json.dumps({
+            await manager.broadcast(safe_json_dumps({
                 "type": "missile_updates",
                 "data": updated_data
             }))
