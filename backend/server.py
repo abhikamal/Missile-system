@@ -327,7 +327,7 @@ async def websocket_endpoint(websocket: WebSocket):
     await manager.connect(websocket)
     try:
         # Send initial data
-        await websocket.send_text(json.dumps({
+        await websocket.send_text(safe_json_dumps({
             "type": "initial_data",
             "missiles": [missile.dict() for missile in active_missiles.values()],
             "interceptor_sites": [site.dict() for site in interceptor_sites]
