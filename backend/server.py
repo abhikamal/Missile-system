@@ -26,6 +26,17 @@ db = client[os.environ['DB_NAME']]
 # Create the main app without a prefix
 app = FastAPI()
 
+# Custom JSON encoder for datetime objects
+class DateTimeEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, dt_class):
+            return obj.isoformat()
+        return super().default(obj)
+
+def safe_json_dumps(data):
+    """Safely serialize data to JSON, handling datetime objects"""
+    return json.dumps(data, cls=DateTimeEncoder)
+
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
 
